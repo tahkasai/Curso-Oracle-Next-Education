@@ -1,3 +1,7 @@
+// lista para evitar
+let listaDeNumerosSorteados = [];
+let numeroLimite = 10;
+// variaveis
 let numeroSecreto = gerarNumeroAleatorio();
 let tentivas = 1;
 
@@ -5,6 +9,7 @@ let tentivas = 1;
 function exibirTextoNaTela(tag,texto){
     let campo = document.querySelector(tag);
     campo.innerHTML = texto;
+    responsiveVoice.speak(texto, 'Brazilian Portuguese Female', {rate:1.2});
 }
 
 // função pra mensagem inicial
@@ -33,9 +38,29 @@ function verificarChute(){ // criando uma função (trecho de código que realiz
         } else {
             exibirTextoNaTela('p','O número secreto é maior');
         }
+        tentivas++;
         limparCampo();
     }
-    tentivas++;
+}
+
+// Função pra criar um número aleatório
+function gerarNumeroAleatorio(){
+    let numeroEscolhido = parseInt(Math.random()* numeroLimite + 1);
+    let quantidadeDeElementosNaLista = listaDeNumerosSorteados.length;
+
+    if(quantidadeDeElementosNaLista == numeroLimite){
+        listaDeNumerosSorteados = [];
+    }
+    // verifica se existe na lista
+    if(listaDeNumerosSorteados.includes(numeroEscolhido)){
+        // recursiva 
+        return gerarNumeroAleatorio();
+    } else {
+        listaDeNumerosSorteados.push(numeroEscolhido);
+        console.log(listaDeNumerosSorteados);
+        return numeroEscolhido;
+    }
+    
 }
 
 // Função limpar campo
@@ -44,20 +69,13 @@ function limparCampo(){
     chute.value = '';
 }
 
-// Função pra criar um número aleatório
-function gerarNumeroAleatorio(){
-    return parseInt(Math.random()* 10 + 1);
-}
-
 // reiniciar o jogo
 function reiniciarJogo(){
     mensagemInicial();
 
-    numeroSecreto = gerarNumeroAleatorio;
+    numeroSecreto = gerarNumeroAleatorio();
     tentivas = 1;
     limparCampo();
 
     document.getElementById('reiniciar').setAttribute('disabled',true);
 }
-
-// Array para exivar que caia o mesmo número
