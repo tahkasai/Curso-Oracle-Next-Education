@@ -5,7 +5,6 @@ public class Audio {
     private int duration; // seconds
     private int reproductions; // total reproductions
     private int likes; // total likes
-    private int classification;
 
     // Construtor
     public Audio() {
@@ -43,10 +42,6 @@ public class Audio {
 
     public int getLikes() {
         return likes;
-    }
-
-    public int getClassification() {
-        return classification;
     }
 
     // Methods
