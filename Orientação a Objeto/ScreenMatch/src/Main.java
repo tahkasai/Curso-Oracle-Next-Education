@@ -1,4 +1,6 @@
 import Calculation.CalculadoraDeTempo;
+import Calculation.Recommendation;
+import Model.Episode;
 import Model.Movie;
 import Model.Serie;
 
@@ -13,6 +15,11 @@ public class Main {
 
         System.out.println("Sua lista\n-------------------------\n"+itACoisa.getNome()+"\n"+osOutros.getNome()+"\nDuração total: "+calculadora.getTempoTotal()+" minutos");
 
+        Recommendation filtroDeRecomentacao = new Recommendation();
 
+        filtroDeRecomentacao.filtra(osOutros);
+
+        Episode episodio = new Episode(1,"capitulo 1",itACoisa,300);
+        filtroDeRecomentacao.filtra(episodio);
     }
 }
