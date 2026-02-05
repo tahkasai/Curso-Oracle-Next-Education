@@ -1,5 +1,7 @@
 package Model;
 
+import org.jetbrains.annotations.NotNull;
+
 public class Serie extends Title{
     private int temporadas;
     private int episodios;
@@ -53,5 +55,23 @@ public class Serie extends Title{
     @Override
     public int getDuracaoEmMinutos(){
         return temporadas * episodios * minutosPorSerie;
+    }
+
+    @Override
+    public int getClassificacao() {
+        return 0;
+    }
+
+//
+
+    @Override
+    public String toString() {
+        return  this.getNome() +
+                "com " + episodios + " episódios";
+    }
+
+    @Override
+    public int compareTo(@NotNull Title outroTitulo) {
+        return this.getNome().compareTo(outroTitulo.getNome());
     }
 }

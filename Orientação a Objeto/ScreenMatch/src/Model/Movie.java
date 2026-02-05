@@ -1,8 +1,8 @@
 package Model;
 
-import Calculation.Classification;
+import org.jetbrains.annotations.NotNull;
 
-public class Movie extends Title implements Classification {
+public class Movie extends Title implements Comparable<Title> {
     private String diretor;
 
     public Movie(int duracaoEmMinutos, int totalDeAvaliacoes, double somaDasAvaliacoes, boolean incluidoNoPlano, int anoDeLancamento, String nome, String diretor) {
@@ -22,5 +22,16 @@ public class Movie extends Title implements Classification {
     @Override
     public int getClassificacao() {
         return (int) pegaMedia()/2;
+    }
+
+    @Override
+    public String toString() {
+        return  this.getNome() +
+                " de " + this.getAnoDeLancamento();
+    }
+
+    @Override
+    public int compareTo(@NotNull Title outroTitulo) {
+        return this.getNome().compareTo(outroTitulo.getNome());
     }
 }

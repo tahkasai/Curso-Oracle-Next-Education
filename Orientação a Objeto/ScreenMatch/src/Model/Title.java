@@ -1,6 +1,6 @@
 package Model;
 
-public class Title {
+public abstract class Title implements Comparable<Title>{
 
     private String nome;
     private int anoDeLancamento;
@@ -75,4 +75,6 @@ public class Title {
     public double pegaMedia(){
         return somaDasAvaliacoes / totalDeAvaliacoes;
     }
+
+    public abstract int getClassificacao();
 }
