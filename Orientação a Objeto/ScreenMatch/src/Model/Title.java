@@ -1,6 +1,9 @@
 package Model;
 
-public abstract class Title implements Comparable<Title>{
+import Excecao.ErroDeConversaoDeAnoException;
+import org.jetbrains.annotations.NotNull;
+
+public class Title implements Comparable<Title>{
 
     private String nome;
     private int anoDeLancamento;
@@ -24,6 +27,17 @@ public abstract class Title implements Comparable<Title>{
         this.incluidoNoPlano = incluidoNoPlano;
         this.anoDeLancamento = anoDeLancamento;
         this.nome = nome;
+    }
+
+    public Title(TitleOmdb meuTituloOmdb) {
+        this.nome = meuTituloOmdb.title();
+
+        if(meuTituloOmdb.year().length() > 4){
+            // Criando a própria exceção
+            throw (new ErroDeConversaoDeAnoException("Não consigo converter o ano, porque tem mais de um caractere"));
+        }
+        this.anoDeLancamento = Integer.parseInt(meuTituloOmdb.year());
+        this.duracaoEmMinutos = Integer.parseInt(meuTituloOmdb.runtime().substring(0,2));
     }
 
     public String getNome() {
@@ -76,5 +90,17 @@ public abstract class Title implements Comparable<Title>{
         return somaDasAvaliacoes / totalDeAvaliacoes;
     }
 
-    public abstract int getClassificacao();
+    public int getClassificacao(){
+        return 0;
+    };
+
+    @Override
+    public String toString() {
+        return nome + " (" + anoDeLancamento + "), com "+duracaoEmMinutos+" minutos";
+    }
+
+    @Override
+    public int compareTo(@NotNull Title o) {
+        return 0;
+    }
 }
